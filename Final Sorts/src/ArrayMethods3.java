@@ -28,5 +28,33 @@ public class ArrayMethods3
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public static int partition(int[] list1, int front, int back)
+	{
+		int pivot = list1[front];    
+	    int right = back;
+	    int index = 0;
+
+	    for(int i = 1;i<back;i++)
+	    	{
+		        if(list1[i]<pivot)
+		        {
+		            int temp = list1[i];
+		            list1[i] = list1[i-1];
+		            list1[i-1] = temp;             
+		            index = i;
+		        } 
+		        else if(list1[i]>pivot&&right>i)
+		        {
+		            int temp = list1[i];
+		            list1[i] = list1[right];
+		            list1[right] = temp;
+		            right -= 1;
+		            i--;
+		        }
+	    	}
+	    return index;
+	
+	}
 
 }
