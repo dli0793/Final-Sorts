@@ -6,7 +6,7 @@ public class ArrayMethods3
 	public static void main(String[] args) 
 	{
 		//Testing Arrays
-		String[] list1 = {"microsoft", "apple", "cucumber", "zorro", "tangerine"};
+		String[] list1 = {"microsoft", "apple", "cucumber", "zorro", "tangerine", "avocado"};
 		String[] list2 = {"banana", "cherry", "mahogany", "oreos", "pinata"};
 		int[] list3 = {3, 4, 2, 7, 12, 22, 0, 1};
 				
@@ -29,7 +29,7 @@ public class ArrayMethods3
 		
 		//QuickSort Test
 		start = System.nanoTime();
-		quickSort(list3, 0, 7);
+		ArrayMethods3.quickSort(list3, 0, 7); 
 		end = System.nanoTime();
 		time = end-start;
 		System.out.println("QuickSort test took: " + time + "nanoseconds.");
@@ -46,69 +46,46 @@ public class ArrayMethods3
 		
 		int center = list1.length/2;
 		String[] half1 = Arrays.copyOfRange(list1, 0, center);
-		String[] half2 = Arrays.copyOfRange(list1, center+1, list1.length-1);
+		String[] half2 = Arrays.copyOfRange(list1, center, list1.length);
 		
 		return merge(mergeSort(half1), mergeSort(half2));
 	}
 
 	public static String[] merge(String[] list1, String[] list2)
 	{
-		String[] x;
-		String[] z;
+		int list1Index = 0;
+		int list2Index = 0;
+		int sortedIndex = 0;
+		String[] y = new String[list1.length+list2.length];
 		
-		if(list1.length<list2.length)
-		{
-			x = list1;
-			z = list2;
-		}
-		else
-		{
-			x = list2;
-			z = list1;
-		}
-		
-		String[] y = new String[z.length+x.length];
-		int r = 0;
-		for(int i = 0;i<x.length;i++)
-		{
-			if(list1[i].compareTo(list2[i])<0)
-			{
-				y[r] = list1[i];
-				y[r+1] = list2[i];
-				r+=2;
-			}
-			
-			else
-			{
-				y[r] = list2[i];
-				y[r+1] = list1[i];
-				r+=2;
-			}
-		}
-		
-		for(int i = 0;i<z.length;i++)
-		{
-			y[r] = z[i];
-		}
-		
-		String tempStr;
-		int counter = 1;
-		while(counter>0)
-		{
-			counter = 0;
-			for(int i=0;i<y.length-1;i++)
-			{	
-				if(y[i].compareTo(y[i+1])>0)
-				{
-					tempStr = y[i];
-					y[i] = y[i+1];
-					y[i+1] = tempStr;
-					counter = 1;
-				}
-			}
-		}
-		
-		return y;
+	    while(list1Index<list1.length&&list2Index<list2.length)
+	    {
+	        if(list1[list1Index].compareTo(list2[list2Index])<0)
+	        {
+	            y[sortedIndex] = list1[list1Index];
+	            list1Index++;
+	        }
+	        else
+	        {
+	            y[sortedIndex] = list2[list2Index];
+	            list2Index++;
+	        }
+	        sortedIndex++;
+	    }
+	    while(list1Index<list1.length)
+	    {
+	        y[sortedIndex] = list1[list1Index];
+	        list1Index++;
+	        sortedIndex++;
+	    }
+	    while(list2Index<list2.length)
+	    {
+	        y[sortedIndex] = list2[list2Index];
+	        list2Index++;
+	        sortedIndex++;
+	    }
+
+	    return y;
 	}
 	
 	public static int partition(int[] list1, int front, int back)
