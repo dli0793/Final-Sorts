@@ -1,3 +1,7 @@
+//There is a stack overflow error. Not sure why.
+//Daniel Li
+//Final Sorts
+
 import java.util.Arrays;
 
 public class ArrayMethods3 
@@ -118,7 +122,7 @@ public class ArrayMethods3
 	
 	public static void quickSort(int[] list1, int front, int back)
 	{
-		if(back>front)
+		if(front<back)
 		{
 			int pivotPos = partition(list1, front, back);
 			quickSort(list1, front, pivotPos-1);
